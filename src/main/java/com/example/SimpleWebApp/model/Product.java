@@ -16,14 +16,43 @@ public class Product {
     private int priceRs;
     @Column(name = "description")
     private String description;
-    private String category;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @Column(name = "quantity")
     private int quantity;
 
-    public String getCategory() {
+    private String fileName;
+    private String message;
+
+    public Product(String fileName, String message) {
+        this.fileName = fileName;
+        this.message = message;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -64,7 +93,7 @@ public class Product {
     public Product() {
     }
 
-    public Product( int prodId,String prodName,int priceRs,String description, String category,int quantity ) {
+    public Product( int prodId,String prodName,int priceRs,String description, Category category,int quantity ) {
         this.prodId = prodId;
         this.prodName = prodName;
         this.priceRs = priceRs;
@@ -80,7 +109,6 @@ public class Product {
                 ", prodName='" + prodName + '\'' +
                 ", priceRs=" + priceRs +
                 ", description='" + description + '\'' +
-                ", category='" + category + '\'' +
                 ", quantity='" + quantity + '\'' +
                 '}';
     }
